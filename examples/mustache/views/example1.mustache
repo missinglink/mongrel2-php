@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+    <h1>{{title}}</h1>
+    {{#sections}}
+        <fieldset>
+            <legend>{{title}}</legend>
+            <pre>{{{text}}}</pre>
+        </fieldset>
+    {{/sections}}
+    {{^sections}}
+        <strong>No sections</strong>
+    {{/sections}}
+    </body>
+</html>
