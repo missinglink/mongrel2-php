@@ -21,11 +21,11 @@ class Client
         }
         
         // Listen for requests
-        $this->frontend = $context->getSocket( \ZMQ::SOCKET_UPSTREAM, null, null );
+        $this->frontend = $context->getSocket( \ZMQ::SOCKET_UPSTREAM );
         $this->frontend->connect( $frontDsn );
 
         // Send responses
-        $this->backend = $context->getSocket( \ZMQ::SOCKET_PUB, null, null );
+        $this->backend = $context->getSocket( \ZMQ::SOCKET_PUB );
         $this->backend->connect( $backDsn );
     }
 
