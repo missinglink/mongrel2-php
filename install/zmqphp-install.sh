@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sudo apt-get update
-sudo apt-get install -y git-core php5-uuid
+sudo apt-get install -y git-core php5-common php5-dev php5-cli php5-uuid
 
 cd /tmp
 git clone git://github.com/mkoppanen/php-zmq.git

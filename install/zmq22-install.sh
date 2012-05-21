@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# sudo apt-get update
-# sudo apt-get install -y libtool autoconf automake uuid-dev git-core cowsay
+sudo apt-get update
+sudo apt-get install -y libtool autoconf automake uuid-dev git-core
 
 cd /tmp
 rm -rf libzmq
@@ -16,4 +16,4 @@ sudo make install
 clear
 dpkg -l | grep zmq
 
-cowsay "Installation Complete"
+echo "Installation Complete"
