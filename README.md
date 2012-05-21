@@ -25,7 +25,7 @@ Tests
 
     phpunit -c test/phpunit.xml --coverage-html test/coverage .
 
-Travis CI ![travis-ci](https://secure.travis-ci.org/missinglink/mongrel2-php.png?branch=master)
+![travis-ci](http://cdn-ak.favicon.st-hatena.com/?url=http%3A%2F%2Fabout.travis-ci.org%2F) ![travis-ci](https://secure.travis-ci.org/missinglink/mongrel2-php.png?branch=master)
 
 License
 ------------------------
