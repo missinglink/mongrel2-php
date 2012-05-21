@@ -43,6 +43,7 @@ Mustache View Renderer Example
     ./mongrel-start.sh
     ./mustache/devices/mustache-server.sh (in another window)
 
+https://github.com/missinglink/mongrel2-php/blob/master/examples/mustache/devices/mustache-server.sh
 Open http://localhost:8001/ in your web browser
 
 Tests
