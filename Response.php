@@ -24,7 +24,7 @@ class Response
      */
     public function getMessage()
     {
-        if( !isset( $this->uuid ) || empty( $this->browsers ) )
+        if( !is_string( $this->uuid ) || !is_string( $this->browsers ) )
         {
             throw new ResponseException( 'Invalid response. You must specify a target uuid and browser id(s)' );
         }
