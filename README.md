@@ -25,6 +25,8 @@ Tests
 
     phpunit -c test/phpunit.xml --coverage-html test/coverage .
 
+![travis-ci](https://secure.travis-ci.org/missinglink/mongrel2-php.png?branch=master)
+
 License
 ------------------------
 
