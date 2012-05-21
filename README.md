@@ -12,6 +12,7 @@ Install
     sudo ./pecl-http-install.sh
 
 Simple Client Example
+---------------------
 
     // Create a new Mongrel client
     $mongrelClient = new \Mongrel\Client( new \ZMQContext, 'tcp://127.0.0.1:9997', 'tcp://127.0.0.1:9996' )
@@ -36,7 +37,7 @@ Simple Client Example
     }
 
 Mustache View Renderer Example
---------
+------------------------------
 
     cd ./examples
     ./mongrel-start.sh
