@@ -26,7 +26,7 @@ Tests
 License
 ------------------------
 
-Insomnia is released under the MIT(Poetic) Software license
+Released under the MIT(Poetic) Software license
 
     This work 'as-is' we provide.
     No warranty express or implied.
