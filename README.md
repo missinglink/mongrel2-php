@@ -4,10 +4,11 @@ Install
 --------
 
     cd ./install
-    ./zmq22-install.sh
-    ./zmqphp-install.sh
+    sudo ./zmq22-install.sh
+    sudo ./zmqphp-install.sh
     ./zmq-version.sh
-    ./mongrel2-zmq2-install.sh
+    sudo ./mongrel2-zmq2-install.sh
+    sudo ./pecl-http-install.sh
 
 Example
 --------
