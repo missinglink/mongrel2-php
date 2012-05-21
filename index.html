@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>mongrel2-php by missinglink</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>mongrel2-php</h1>
+        <p>Simple library for writing Mongrel2 clients in PHP 5.3+ using zeromq 2.2</p>
+        <p class="view"><a href="https://github.com/missinglink/mongrel2-php">View the Project on GitHub <small>missinglink/mongrel2-php</small></a></p>
+        <ul>
+          <li><a href="https://github.com/missinglink/mongrel2-php/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/missinglink/mongrel2-php/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/missinglink/mongrel2-php">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Simple library for writing Mongrel2 clients in PHP 5.3+ using zeromq 2.2</h1>
+
+<h2>Install</h2>
+
+<pre><code>echo '[Installing ØMQ 2.2]' &amp;&amp; ./install/zmq22-install.sh
+echo '[Installing ØMQ PHP Module]' &amp;&amp; ./install/zmqphp-install.sh
+echo '[Installing Mongrel2 Web Server]' &amp;&amp; ./install/mongrel2-zmq2-install.sh
+echo '[Installing pecl_http Module]' &amp;&amp; ./install/pecl-http-install.sh
+</code></pre>
+
+<h2>Simple Client Example</h2>
+
+<pre><code>// Create a new Mongrel client
+$mongrelClient = new \Mongrel\Client( new \ZMQContext, 'tcp://127.0.0.1:9997', 'tcp://127.0.0.1:9996' )
+
+// Create a new Mongrel HTTP client
+$client = new \Mongrel\Http\Client( $mongrelClient );
+
+// Listen for requests
+while( true )
+{
+    /* @var $request \Mongrel\Http\Request */
+    $request = $client-&gt;recv();
+
+    // Build a response
+    $response = new \Mongrel\Http\Response( '&lt;h1&gt;Hello World!&lt;/h1&gt;', array( 'Content-Type' =&gt; 'text/html' ) );
+
+    // Send reply
+    $client-&gt;send( $response, $request-&gt;getMongrelRequest() );
+
+    // Clean up
+    unset( $request, $response );
+}
+</code></pre>
+
+<h2>Mustache View Renderer Example</h2>
+
+<pre><code>cd ./examples
+./mongrel-start.sh
+./mustache/devices/mustache-server.sh (in another window)
+</code></pre>
+
+<p><a href="https://github.com/missinglink/mongrel2-php/blob/master/examples/mustache/devices/mustache-server.sh">https://github.com/missinglink/mongrel2-php/blob/master/examples/mustache/devices/mustache-server.sh</a></p>
+
+<p>Open http://localhost:8001/ in your web browser</p>
+
+<h2>Tests</h2>
+
+<pre><code>phpunit -c test/phpunit.xml --coverage-html test/coverage .
+</code></pre>
+
+<h2>Travis CI</h2>
+
+<p><img src="http://cdn-ak.favicon.st-hatena.com/?url=http%3A%2F%2Fabout.travis-ci.org%2F" alt="travis-ci"> <a href="http://travis-ci.org/#!/missinglink/mongrel2-php">http://travis-ci.org/#!/missinglink/mongrel2-php</a></p>
+
+<p><img src="https://secure.travis-ci.org/missinglink/mongrel2-php.png?branch=master" alt="travis-ci"></p>
+
+<h2>License</h2>
+
+<p>Released under the MIT(Poetic) Software license</p>
+
+<pre><code>This work 'as-is' we provide.
+No warranty express or implied.
+Therefore, no claim on us will abide.
+Liability for damages denied.
+
+Permission is granted hereby,
+to copy, share, and modify.
+Use as is fit,
+free or for profit.
+These rights, on this notice, rely.
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/missinglink">missinglink</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
