@@ -12,3 +12,4 @@ before_install:
     - sudo ./pecl-http-install.sh
 
 script: phpunit -c test/phpunit.xml .
+
