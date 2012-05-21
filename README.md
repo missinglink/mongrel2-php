@@ -1,4 +1,5 @@
-PHP library for Mongrel2
+Simple library for writing Mongrel2 clients in PHP 5.3+ using zeromq 2.2
+========================================================================
 
 Install
 --------
