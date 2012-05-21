@@ -13,10 +13,11 @@ Install
 
 Simple Client Example
 
-    <?php
+    // Create a new Mongrel client
+    $mongrelClient = new \Mongrel\Client( new \ZMQContext, 'tcp://127.0.0.1:9997', 'tcp://127.0.0.1:9996' )
     
     // Create a new Mongrel HTTP client
-    $client = new \Mongrel\Http\Client( new \Mongrel\Client( new \ZMQContext, 'tcp://127.0.0.1:9997', 'tcp://127.0.0.1:9996' ) );
+    $client = new \Mongrel\Http\Client( $mongrelClient );
     
     // Listen for requests
     while( true )
@@ -25,7 +26,7 @@ Simple Client Example
         $request = $client->recv();
         
         // Build a response
-        $response = new \Mongrel\Http\Response( '<h1>Hello World!</h1>, array( 'Content-Type' => 'text/html; charset=UTF-8' ) );
+        $response = new \Mongrel\Http\Response( '<h1>Hello World!</h1>, array( 'Content-Type' => 'text/html' ) );
         
         // Send reply
         $client->send( $response, $request->getMongrelRequest() );
