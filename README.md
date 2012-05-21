@@ -4,12 +4,10 @@ Simple library for writing Mongrel2 clients in PHP 5.3+ using zeromq 2.2
 Install
 --------
 
-    cd ./install
-    ./zmq22-install.sh
-    ./zmqphp-install.sh
-    ./zmq-version.sh
-    ./mongrel2-zmq2-install.sh
-    ./pecl-http-install.sh
+    echo '[Installing ØMQ 2.2]' && ./install/zmq22-install.sh
+    echo '[Installing ØMQ PHP Module]' && ./install/zmqphp-install.sh
+    echo '[Installing Mongrel2 Web Server]' && ./install/mongrel2-zmq2-install.sh
+    echo '[Installing pecl_http Module]' && ./install/pecl-http-install.sh
 
 Simple Client Example
 ---------------------

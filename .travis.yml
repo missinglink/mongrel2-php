@@ -4,11 +4,10 @@ php:
     - 5.3
 
 before_install:
-    - cd install
-    - ./zmq22-install.sh
-    - ./zmqphp-install.sh
-    - ./mongrel2-zmq2-install.sh
-    - ./pecl-http-install.sh
+    - echo '[Installing ØMQ 2.2]' && ./install/zmq22-install.sh > /dev/null 2>&1
+    - echo '[Installing ØMQ PHP Module]' && ./install/zmqphp-install.sh > /dev/null 2>&1
+    - echo '[Installing Mongrel2 Web Server]' && ./install/mongrel2-zmq2-install.sh > /dev/null 2>&1
+    - echo '[Installing pecl_http Module]' && ./install/pecl-http-install.sh > /dev/null 2>&1
 
 script: phpunit -c test/phpunit.xml .
 
