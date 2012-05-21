@@ -5,11 +5,11 @@ Install
 --------
 
     cd ./install
-    sudo ./zmq22-install.sh
-    sudo ./zmqphp-install.sh
+    ./zmq22-install.sh
+    ./zmqphp-install.sh
     ./zmq-version.sh
-    sudo ./mongrel2-zmq2-install.sh
-    sudo ./pecl-http-install.sh
+    ./mongrel2-zmq2-install.sh
+    ./pecl-http-install.sh
 
 Simple Client Example
 ---------------------
