@@ -7,7 +7,6 @@ before_install:
     - cd install
     - ./zmq22-install.sh
     - ./zmqphp-install.sh
-    - ./zmq-version.sh
     - ./mongrel2-zmq2-install.sh
     - ./pecl-http-install.sh
 
