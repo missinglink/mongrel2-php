@@ -20,4 +20,4 @@ php -i | grep zmq
 
 echo "Installation Complete"
 echo "The Imagick extension for PHP can provide segmentation faults on some systems"
-echo "Optionally remove imagick with: sudo apt-get remove php5-imagick
+echo "Optionally remove imagick with: sudo apt-get remove php5-imagick"
