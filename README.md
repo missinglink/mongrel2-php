@@ -27,7 +27,7 @@ Simple Client Example
         $request = $client->recv();
         
         // Build a response
-        $response = new \Mongrel\Http\Response( '<h1>Hello World!</h1>, array( 'Content-Type' => 'text/html' ) );
+        $response = new \Mongrel\Http\Response( '<h1>Hello World!</h1>', array( 'Content-Type' => 'text/html' ) );
         
         // Send reply
         $client->send( $response, $request->getMongrelRequest() );
