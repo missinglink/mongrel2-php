@@ -11,7 +11,30 @@ Install
     sudo ./mongrel2-zmq2-install.sh
     sudo ./pecl-http-install.sh
 
-Example
+Simple Client Example
+
+    <?php
+    
+    // Create a new Mongrel HTTP client
+    $client = new \Mongrel\Http\Client( new \Mongrel\Client( new \ZMQContext, 'tcp://127.0.0.1:9997', 'tcp://127.0.0.1:9996' ) );
+    
+    // Listen for requests
+    while( true )
+    {
+        /* @var $request \Mongrel\Http\Request */
+        $request = $client->recv();
+        
+        // Build a response
+        $response = new \Mongrel\Http\Response( '<h1>Hello World!</h1>, array( 'Content-Type' => 'text/html; charset=UTF-8' ) );
+        
+        // Send reply
+        $client->send( $response, $request->getMongrelRequest() );
+        
+        // Clean up
+        unset( $request, $response );
+    }
+
+Mustache View Renderer Example
 --------
 
     cd ./examples
