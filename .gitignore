@@ -2,3 +2,4 @@ examples/mongrel/logs/*
 examples/mongrel/run/*
 examples/mongrel/tmp/*
 examples/config.sqlite
+test/coverage
