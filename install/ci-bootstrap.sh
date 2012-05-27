@@ -32,5 +32,5 @@ sudo make install
 echo "extension=zmq.so" | sudo tee $PHP_INI_PATH/zmq.ini
 
 # Installing pecl_http Module
-sudo pecl install pecl_http
+printf "\n\n\n\n" | sudo pecl install pecl_http
 echo "extension=http.so" | sudo tee $PHP_INI_PATH/http.ini
