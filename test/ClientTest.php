@@ -3,6 +3,7 @@
 namespace Mongrel;
 
 require_once dirname( __FILE__ ) . '/../Client.php';
+require_once dirname( __FILE__ ) . '/../Dsn.php';
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,16 +16,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     
     public function testConstructor_FrontDsn_IsNotString()
     {
-        $this->setExpectedException( 'InvalidArgumentException' );
+        $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
-        $client = new Client( $this->context, array(), 'tcp://127.0.0.1:8000' );
+        $client = new Client( $this->context, array(), new Dsn( 'tcp://127.0.0.1:8000' ) );
     }
     
     public function testConstructor_BackDsn_IsNotString()
     {
-        $this->setExpectedException( 'InvalidArgumentException' );
+        $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
-        $client = new Client( $this->context, 'tcp://127.0.0.1:8000', array() );
+        $client = new Client( $this->context, new Dsn( 'tcp://127.0.0.1:8000' ), array() );
     }
     
     public function testConstructor()
@@ -51,7 +52,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->with( \ZMQ::SOCKET_PUB )
             ->will( $this->returnValue( $backMock ) );
         
-        $client = new Client( $this->context, 'tcp://127.0.0.1:8000', 'tcp://127.0.0.1:8001' );
+        $client = new Client( $this->context, new Dsn( 'tcp://127.0.0.1:8000' ), new Dsn( 'tcp://127.0.0.1:8001' ) );
     }
     
     public function testRecv()
@@ -75,7 +76,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->with( \ZMQ::SOCKET_PUB )
             ->will( $this->returnValue( $backMock ) );
         
-        $client = new Client( $this->context, 'tcp://127.0.0.1:8000', 'tcp://127.0.0.1:8001' );
+        $client = new Client( $this->context, new Dsn( 'tcp://127.0.0.1:8000' ), new Dsn( 'tcp://127.0.0.1:8001' ) );
         $recv = $client->recv();
         
         $this->assertEquals( new \Mongrel\Request( $message ), $recv );
@@ -106,7 +107,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->with( \ZMQ::SOCKET_PUB )
             ->will( $this->returnValue( $backMock ) );
         
-        $client = new Client( $this->context, 'tcp://127.0.0.1:8000', 'tcp://127.0.0.1:8001' );
+        $client = new Client( $this->context, new Dsn( 'tcp://127.0.0.1:8000' ), new Dsn( 'tcp://127.0.0.1:8001' ) );
         $client->send( $response );
     }
 }

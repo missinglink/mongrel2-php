@@ -13,7 +13,11 @@ Simple Client Example
 ---------------------
 
     // Create a new Mongrel client
-    $mongrelClient = new \Mongrel\Client( new \ZMQContext, 'tcp://127.0.0.1:9997', 'tcp://127.0.0.1:9996' )
+    $mongrelClient = new \Mongrel\Client(
+        new \ZMQContext,
+        new \Mongrel\Dsn( 'tcp://127.0.0.1:9997' ),
+        new \Mongrel\Dsn( 'tcp://127.0.0.1:9996' )
+    );
     
     // Create a new Mongrel HTTP client
     $client = new \Mongrel\Http\Client( $mongrelClient );

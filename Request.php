@@ -25,11 +25,11 @@ class Request
             throw new RequestException( 'Invalid format. Failed to parse mongrel request' );
         }
         
-        $this->uuid         = $this->data[ 'uuid' ];
-        $this->browser      = $this->data[ 'id' ];
-        $this->path         = $this->data[ 'path' ];
-        $this->headers      = json_decode( $this->data[ 'headers' ], true );
-        $this->body         = $this->data[ 'body' ];
+        $this->uuid    = $this->data[ 'uuid' ];
+        $this->browser = $this->data[ 'id' ];
+        $this->path    = $this->data[ 'path' ];
+        $this->headers = json_decode( $this->data[ 'headers' ], true );
+        $this->body    = $this->data[ 'body' ];
     }
     
     /**

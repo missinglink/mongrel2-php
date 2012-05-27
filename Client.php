@@ -9,24 +9,19 @@ class Client
     /**
      * Generic client interface for Mongrel2
      * 
-     * @param \ZMQContext $context The ZMQ context to use
-     * @param string $frontDsn eg. 'tcp://127.0.0.1:9997'
-     * @param string $backDsn eg. 'tcp://127.0.0.1:9996'
+     * @param \ZMQContext $context
+     * @param Dsn $frontDsn
+     * @param Dsn $backDsn
      */
-    public function __construct( \ZMQContext $context, $frontDsn, $backDsn )
+    public function __construct( \ZMQContext $context, Dsn $front, Dsn $back )
     {
-        if( !is_string( $frontDsn ) || !is_string( $backDsn ) )
-        {
-            throw new \InvalidArgumentException( 'Invalid DSN' );
-        }
-        
         // Listen for requests
         $this->frontend = $context->getSocket( \ZMQ::SOCKET_UPSTREAM, null );
-        $this->frontend->connect( $frontDsn );
+        $this->frontend->connect( $front->toString() );
 
         // Send responses
         $this->backend = $context->getSocket( \ZMQ::SOCKET_PUB, null );
-        $this->backend->connect( $backDsn );
+        $this->backend->connect( $back->toString() );
     }
 
     /**
