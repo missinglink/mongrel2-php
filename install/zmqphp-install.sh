@@ -13,7 +13,8 @@ phpize
 make
 sudo make install
 
-echo "extension=zmq.so" | sudo tee /etc/php5/conf.d/zmq.ini
+PHP_INI_PATH=$(php --ini | grep "Scan for additional" | sed -e "s|.*:\s*||")
+echo "extension=zmq.so" | sudo tee $PHP_INI_PATH/zmq.ini
 
 clear
 php -i | grep zmq
