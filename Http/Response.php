@@ -47,42 +47,42 @@ class Response
     }
     
     /**
-     * Set response body
+     * Get response body
      * 
-     * @param string $body 
+     * @return string $body 
      */
-    public function setBody( $body )
+    public function getBody()
     {
-        $this->body = $body;
+        return $this->body;
     }
     
     /**
-     * Set response headers
+     * Get response headers
      * 
-     * @param array $headers 
+     * @return array $headers 
      */
-    public function setHeaders( array $headers )
+    public function getHeaders()
     {
-        $this->headers = $headers;
+        return $this->headers;
     }
     
     /**
-     * Set response status
+     * Get response status
      * 
-     * @param string $status eg '200 OK'
+     * @return string $status eg '200 OK'
      */
-    public function setStatus( $status )
+    public function getStatus()
     {
-        $this->status = $status;
+        return $this->status;
     }
     
     /**
-     * Set response protocol
+     * Get response protocol
      * 
-     * @param string $protocol eg 'HTTP/1.1'
+     * @return string $protocol eg 'HTTP/1.1'
      */
-    public function setProtocol( $protocol )
+    public function getProtocol()
     {
-        $this->protocol = $protocol;
+        return $this->protocol;
     }
 }
