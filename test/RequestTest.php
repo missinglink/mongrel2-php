@@ -18,7 +18,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         new Request( array() );
     }
     
-    public function testConstructor_MessageParser_Invalid1()
+    public function testConstructor_Invalid_Message()
     {
         $this->setExpectedException( 'Mongrel\RequestException' );
         
@@ -26,7 +26,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
     
     /** @dataProvider dataProvider */
-    public function testConstructor_MessageParser_Valid1( Request $request )
+    public function testConstructor( Request $request )
     {
         $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $request );
         $this->assertAttributeInstanceOf( '\Mongrel\Request\Browser', 'browser', $request );
