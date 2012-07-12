@@ -2,19 +2,23 @@
 
 namespace Mongrel;
 
+use \Mongrel\Request,
+    \Mongrel\ResponseException;
+
 class Response
 {
-    const FORMAT = '%s %d:%s, %s';
-    private $uuid, $browsers, $data;
+    private $uuid, $browsers, $body;
     
     /**
      * Create a Mongrel response
      * 
-     * @param string $data
+     * @param Request\Uuid $uuid
+     * @param Request\BrowserStack $browsers
      */
-    public function __construct( $data = '' )
+    public function __construct( Request\Uuid $uuid, Request\BrowserStack $browsers )
     {
-        $this->setData( $data );
+        $this->uuid     = $uuid;
+        $this->browsers = $browsers;
     }
     
     /**
@@ -24,64 +28,21 @@ class Response
      */
     public function getMessage()
     {
-        if( !is_string( $this->uuid ) || !is_string( $this->browsers ) )
-        {
-            throw new ResponseException( 'Invalid response. You must specify a target uuid and browser id(s)' );
-        }
-        
-        return sprintf( self::FORMAT, $this->uuid, strlen( $this->browsers ), $this->browsers, $this->data );
-    }
-    
-    /**
-     * Use the creator of a request as the target for this response
-     * 
-     * @param Request $request 
-     */
-    public function replyTo( Request $request )
-    {
-        $this->uuid     = $request->getUuid();
-        $this->browsers = $request->getBrowser();
-        
-        return $this;
-    }
-    
-    /**
-     * Set target uuid
-     * 
-     * @param string $uuid 
-     */
-    public function setUuid( $uuid )
-    {
-        if( !is_string( $uuid ) )
-        {
-            throw new \InvalidArgumentException( 'Response uuid must be a string' );
-        }
-        
-        $this->uuid = $uuid;
-    }
-
-    /**
-     * Set target browser ids
-     * 
-     * @param array $browsers 
-     */
-    public function setBrowsers( array $browsers )
-    {
-        $this->browsers = implode( ' ', $browsers );
+        return sprintf( '%s %d:%s, %s', $this->uuid, strlen( $this->browsers ), $this->browsers, $this->body );
     }
     
     /**
      * Set response body
      * 
-     * @param string $data 
+     * @param string $body 
      */
-    public function setData( $data )
+    public function setBody( $body )
     {
-        if( !is_string( $data ) )
+        if( !is_string( $body ) )
         {
-            throw new \InvalidArgumentException( 'Response data must be a string' );
+            throw new ResponseException( 'Invalid format. Response body must be a string' );
         }
         
-        $this->data = $data;
+        $this->body = $body;
     }
 }

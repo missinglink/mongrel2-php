@@ -5,72 +5,76 @@ namespace Mongrel;
 require_once dirname( __FILE__ ) . '/../Request.php';
 require_once dirname( __FILE__ ) . '/../RequestException.php';
 
+require_once dirname( __FILE__ ) . '/../Request/Body.php';
+require_once dirname( __FILE__ ) . '/../Request/Browser.php';
+require_once dirname( __FILE__ ) . '/../Request/Path.php';
+require_once dirname( __FILE__ ) . '/../Request/Uuid.php';
+
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
+    static $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
+    
+    public static function dataProvider()
+    {
+        return array( array( new Request( self::$message ) ) );
+    }
+    
     public function testConstructor_ParamIsNotString()
     {
-        $this->setExpectedException( 'InvalidArgumentException' );
+        $this->setExpectedException( 'Mongrel\RequestException' );
         
-        $request = new Request( array() );
+        new Request( array() );
     }
     
     public function testConstructor_MessageParser_Invalid1()
     {
-        $message = 'test';
         $this->setExpectedException( 'Mongrel\RequestException' );
         
-        $request = new Request( $message );
+        new Request( 'invalid message' );
     }
     
-    public function testConstructor_MessageParser_Valid1()
+    /** @dataProvider dataProvider */
+    public function testConstructor_MessageParser_Valid1( Request $request )
     {
-        $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
-        $request = new Request( $message );
-        
-        $this->assertAttributeSame( '288c0bca-f46c-46dc-b15a-bdd581c30e38', 'uuid', $request );
-        $this->assertAttributeSame( '99', 'browser', $request );
-        $this->assertAttributeSame( '/favicon.ico', 'path', $request );
-        $this->assertAttributeSame( array( 'PATH' => '/favicon.ico' ), 'headers', $request );
-        $this->assertAttributeSame( 'foo=bar', 'body', $request );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $request );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Browser', 'browser', $request );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Path', 'path', $request );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Headers', 'headers', $request );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Body', 'body', $request );
     }
     
-    public function testGetUuid()
+    /** @dataProvider dataProvider */
+    public function testGetUuid( Request $request )
     {
-        $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
-        $request = new Request( $message );
-        
-        $this->assertEquals( '288c0bca-f46c-46dc-b15a-bdd581c30e38', $request->getUuid() );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $request );
+        $this->assertEquals( '288c0bca-f46c-46dc-b15a-bdd581c30e38', (string) $request->getUuid() );
     }
 
-    public function testGetBrowser()
+    /** @dataProvider dataProvider */
+    public function testGetBrowser( Request $request )
     {
-        $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
-        $request = new Request( $message );
-        
-        $this->assertEquals( '99', $request->getBrowser() );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Browser', 'browser', $request );
+        $this->assertEquals( '99', (string) $request->getBrowser() );
     }
 
-    public function testGetPath()
+    /** @dataProvider dataProvider */
+    public function testGetPath( Request $request )
     {
-        $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
-        $request = new Request( $message );
-        
-        $this->assertEquals( '/favicon.ico', $request->getPath() );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Path', 'path', $request );
+        $this->assertEquals( '/favicon.ico', (string) $request->getPath() );
     }
 
-    public function testGetHeaders()
+    /** @dataProvider dataProvider */
+    public function testGetHeaders( Request $request )
     {
-        $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
-        $request = new Request( $message );
-        
-        $this->assertEquals( array( 'PATH' => '/favicon.ico' ), $request->getHeaders() );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Headers', 'headers', $request );
+        $this->assertEquals( array( 'PATH' => '/favicon.ico' ), $request->getHeaders()->getArrayCopy() );
     }
     
-    public function testGetBody()
+    /** @dataProvider dataProvider */
+    public function testGetBody( Request $request )
     {
-        $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';
-        $request = new Request( $message );
-        
-        $this->assertEquals( 'foo=bar', $request->getBody() );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Body', 'body', $request );
+        $this->assertEquals( 'foo=bar', (string) $request->getBody() );
     }
 }

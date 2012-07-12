@@ -84,10 +84,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testSend()
     {
-        $response = new \Mongrel\Response;
-        $response->setUuid( 'test' );
-        $response->setBrowsers( array( 1 ) );
-        $response->setData( 'test' );
+        $response = new \Mongrel\Response(
+            new Request\Uuid( str_repeat( 'a', 36 ) ),
+            new Request\BrowserStack( new Request\Browser( 1 ) )
+        );
+        $response->setBody( 'test' );
         
         $frontMock = $this->getMock( 'ZMQSocket', array( 'connect', 'send' ), array( $this->context, \ZMQ::SOCKET_UPSTREAM ) );
         $backMock = $this->getMock( 'ZMQSocket', array( 'connect', 'send' ), array( $this->context, \ZMQ::SOCKET_PUB ) );

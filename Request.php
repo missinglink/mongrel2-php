@@ -4,7 +4,7 @@ namespace Mongrel;
 
 class Request
 {
-    const FORMAT = '_^(?<uuid>[a-f0-9\-]{36}) (?<id>[0-9]+) (?<path>\S+) (?<hsize>[0-9]+):(?<headers>{(.+)}),(?<bsize>[0-9]+):(?<body>.*),$_';
+    const FORMAT = '_^(?<uuid>[a-f0-9\-]{36}) (?<browser>[0-9]+) (?<path>\S+) (?<hsize>[0-9]+):(?<headers>{(.+)}),(?<bsize>[0-9]+):(?<body>.*),$_';
     private $data, $uuid, $browser, $path, $headers, $body;
 
     /**
@@ -15,27 +15,22 @@ class Request
      */
     public function __construct( $message )
     {
-        if( !is_string( $message ) )
-        {
-            throw new \InvalidArgumentException( 'Request message must be a string' );
-        }
-        
-        if( !preg_match( self::FORMAT, $message, $this->data ) )
+        if( !is_string( $message ) || !preg_match( self::FORMAT, $message, $this->data ) )
         {
             throw new RequestException( 'Invalid format. Failed to parse mongrel request' );
         }
         
-        $this->uuid    = $this->data[ 'uuid' ];
-        $this->browser = $this->data[ 'id' ];
-        $this->path    = $this->data[ 'path' ];
-        $this->headers = json_decode( $this->data[ 'headers' ], true );
-        $this->body    = $this->data[ 'body' ];
+        $this->uuid    = new Request\Uuid( $this->data[ 'uuid' ] );
+        $this->browser = new Request\Browser( $this->data[ 'browser' ] );
+        $this->path    = new Request\Path( $this->data[ 'path' ] );
+        $this->headers = new Request\Headers( $this->data[ 'headers' ] );
+        $this->body    = new Request\Body( $this->data[ 'body' ] );
     }
     
     /**
      * Get zmq socket uuid
      * 
-     * @return string 
+     * @return Request\Uuid 
      */
     public function getUuid()
     {
@@ -45,7 +40,7 @@ class Request
     /**
      * Get mongrel browser id
      * 
-     * @return int 
+     * @return Request\Browser 
      */
     public function getBrowser()
     {
@@ -55,7 +50,7 @@ class Request
     /**
      * Get URI
      * 
-     * @return string 
+     * @return Request\Path 
      */
     public function getPath()
     {
@@ -65,7 +60,7 @@ class Request
     /**
      * Get request headers
      * 
-     * @return array 
+     * @return Request\Headers 
      */
     public function getHeaders()
     {
@@ -75,7 +70,7 @@ class Request
     /**
      * Get request body
      * 
-     * @return string 
+     * @return Request\Body
      */
     public function getBody()
     {

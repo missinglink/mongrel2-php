@@ -52,7 +52,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testSend()
     {
-        $httpResponse = $this->getMock( 'Mongrel\Http\Response', array( 'getMessage' ) );
+        $httpResponse = $this->getMock( 'Mongrel\Http\Response', array( 'getMessage' ), array( 'test' ) );
         
         $httpResponse->expects( $this->once() )
             ->method( 'getMessage' )
@@ -62,6 +62,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 ->method( 'send' );
         
         $client = new Client( $this->mongrelClient );
-        $client->send( $httpResponse, $this->mongrelRequest );
+        $client->send( $httpResponse, $this->mongrelRequest->getUuid(), $this->mongrelRequest->getBrowser() );
     }
 }

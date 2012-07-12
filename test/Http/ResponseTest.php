@@ -8,12 +8,12 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorAndGetters()
     {
-        $response = new Response( 'a', array( 'b' => 'c' ), 'd', 'e' );
+        $response = new Response( 'a', array( 'b' => 'c' ), '404 Not Found', 'HTTP/1.0' );
         
         $this->assertEquals( 'a', $response->getBody() );
-        $this->assertEquals( array( 'b' => 'c' ), $response->getHeaders() );
-        $this->assertEquals( 'd', $response->getStatus() );
-        $this->assertEquals( 'e', $response->getProtocol() );
+        $this->assertEquals( array( 'b' => 'c', 'Content-Length' => 1 ), $response->getHeaders()->getArrayCopy() );
+        $this->assertEquals( '404 Not Found', $response->getStatus() );
+        $this->assertEquals( 'HTTP/1.0', $response->getProtocol() );
     }
     
     public function testGetMessage()
@@ -23,7 +23,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $expected  = "HTTP/1.1 200 OK\r\n";
         $expected .= "Content-Type: text/html\r\n";
         $expected .= "Content-Length: ". mb_strlen( '<p>Hello World</p>' ) ."\r\n";
-        $expected .= "Connection: close\r\n";
         $expected .= "\r\n";
         $expected .= '<p>Hello World</p>';
         

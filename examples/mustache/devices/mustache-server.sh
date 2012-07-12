@@ -1,6 +1,8 @@
 #!/usr/bin/php
 <?php
 
+use \Mongrel\Http;
+
 require_once sprintf( '%s/../../autoloader.php', __DIR__ );
 require_once sprintf( '%s/Mustache.php', __DIR__ );
 
@@ -8,7 +10,7 @@ require_once sprintf( '%s/Mustache.php', __DIR__ );
 $mustache = new Mustache( file_get_contents( sprintf( '%s/../views/example1.mustache', __DIR__ ) ) );
 
 // Quick & dirty view renderer using Mustache
-$view = function( \Mongrel\Http\Request $request ) use ( $mustache )
+$view = function( Http\Request $request ) use ( $mustache )
 {
     // We need some info from the original Mongrel request object in this view
     $mongrelRequest = $request->getMongrelRequest();
@@ -35,7 +37,7 @@ $mongrelClient = new \Mongrel\Client(
 );
 
 // Create a new Mongrel HTTP client
-$client = new \Mongrel\Http\Client( $mongrelClient );
+$client = new Http\Client( $mongrelClient );
 
 while( true )
 {
@@ -46,10 +48,10 @@ while( true )
     $html = call_user_func( $view, $request );
     
     /* @var $response \Mongrel\Http\Response Build a response */
-    $response = new \Mongrel\Http\Response( $html, array( 'Content-Type' => 'text/html; charset=UTF-8' ) );
+    $response = new Http\Response( $html, array( 'Content-Type' => 'text/html; charset=UTF-8' ) );
     
-    // Send reply
-    $client->send( $response, $request->getMongrelRequest() );
+    // Send response back to the browser that requested it
+    $client->reply( $response, $request );
     
     // Clean up
     unset( $request, $html, $response );

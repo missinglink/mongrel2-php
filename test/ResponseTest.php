@@ -8,114 +8,67 @@ require_once dirname( __FILE__ ) . '/../Http/Request.php';
 
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
+    static $uuid = '288c0bca-f46c-46dc-b15a-bdd581c30e38';
+    
+    public static function dataProvider()
+    {
+        $uuid     = new Request\Uuid( self::$uuid );
+        $browsers = new Request\BrowserStack;
+        $browsers->attach( new Request\Browser( 1 ) );
+        $browsers->attach( new Request\Browser( 2 ) );
+        $response = new Response( $uuid, $browsers );
+        
+        return array( array( $response ) );
+    }
+    
     public function testConstructor_ParamIsNotString()
     {
-        $this->setExpectedException( 'InvalidArgumentException' );
+        $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
-        $response = new Response( array() );
+        new Response( array() );
     }
     
-    public function testConstructor_ParamIsOptional()
-    {
-        $response = new Response;
-        
-        $this->assertAttributeSame( '', 'data', $response );
-    }
-    
-    public function testConstructor()
-    {
-        $response = new Response( 'test' );
-        
-        $this->assertAttributeSame( 'test', 'data', $response );
-    }
-    
-    public function testGetMessage_NoUuid()
-    {
-        $this->setExpectedException( 'Mongrel\ResponseException' );
-        
-        $response = new Response;
-        $response->setBrowsers( array( 1 ) );
-        $response->setData( 'test' );
-        
-        $response->getMessage();
-    }
-    
-    public function testGetMessage_NoBrowsers()
-    {
-        $this->setExpectedException( 'Mongrel\ResponseException' );
-        
-        $response = new Response;
-        $response->setUuid( 'test' );
-        $response->setData( 'test' );
-        
-        $response->getMessage();
-    }
-    
-    public function testGetMessage()
-    {
-        $response = new Response;
-        $response->setUuid( 'test' );
-        $response->setBrowsers( array( 1, 2 ) );
-        $response->setData( 'test' );
-        
-        $message = $response->getMessage();
-        
-        $this->assertEquals( sprintf( Response::FORMAT, 'test', strlen( '1 2' ), '1 2', 'test' ), $message );
-    }
-
-    public function testReplyTo_InvalidParam()
+    public function testConstructor_MissingParams()
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
-        $response = new Response;
-        $response->replyTo( array() );
-    }
-
-    public function testSetUuid_InvalidParam()
-    {
-        $this->setExpectedException( 'InvalidArgumentException' );
-        
-        $response = new Response;
-        $response->setUuid( array() );
+        new Response;
     }
     
-    public function testSetUuid()
-    {
-        $response = new Response;
-        $response->setUuid( 'test' );
-        
-        $this->assertAttributeSame( 'test', 'uuid', $response );
-    }
-
-    public function testSetBrowsers_InvalidParam()
+    public function testConstructor_InvalidTypeParams()
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
-        $response = new Response;
-        $response->setBrowsers( 'string' );
+        new Response( new \stdClass, new \stdClass );
     }
     
-    public function testSetBrowsers()
+    /** @dataProvider dataProvider */
+    public function testConstructor( Response $response )
     {
-        $response = new Response;
-        $response->setBrowsers( array( 1, 2 ) );
-        
-        $this->assertAttributeSame( '1 2', 'browsers', $response );
+        $this->assertInstanceOf( 'Mongrel\Response', $response );
     }
     
-    public function testSetData_InvalidParam()
+    /** @dataProvider dataProvider */
+    public function testGetMessage( Response $response )
     {
-        $this->setExpectedException( 'InvalidArgumentException' );
+        $response->setBody( 'test' );
         
-        $response = new Response;
-        $response->setData( array() );
+        $this->assertEquals( self::$uuid . ' 3:1 2, test', $response->getMessage() );
     }
     
-    public function testSetData()
+    /** @dataProvider dataProvider */
+    public function testSetBody_InvalidParam( Response $response )
     {
-        $response = new Response;
-        $response->setData( 'test' );
+        $this->setExpectedException( 'Mongrel\ResponseException' );
         
-        $this->assertAttributeSame( 'test', 'data', $response );
+        $response->setBody( array() );
+    }
+    
+    /** @dataProvider dataProvider */
+    public function testSetBody( Response $response )
+    {
+        $response->setBody( 'test' );
+        
+        $this->assertAttributeSame( 'test', 'body', $response );
     }
 }

@@ -5,10 +5,7 @@ namespace Mongrel\Http;
 class Response
 {
     const EOL = "\r\n";
-    private $protocol;
-    private $status;
-    private $headers;
-    private $body;
+    private $protocol, $status, $headers, $body;
     
     /**
      * Create an HTTP response
@@ -18,25 +15,24 @@ class Response
      * @param string $status
      * @param string $protocol 
      */
-    public function __construct( $body = '', array $headers = array(), $status = '200 OK', $protocol = 'HTTP/1.1'  )
+    public function __construct( $body, $headers = null, $status = null, $protocol = null )
     {
-        $this->body     = $body;
-        $this->headers  = $headers;
-        $this->status   = $status;
-        $this->protocol = $protocol;
+        $this->body     = new Body( $body );
+        $this->headers  = new Headers( $headers ?: array() );
+        $this->status   = new Status( $status ?: '200 OK' );
+        $this->protocol = new Protocol( $protocol ?: 'HTTP/1.1' );
+        
+        $this->headers->offsetSet( 'Content-Length', mb_strlen( $this->body ) );
     }
     
     /**
-     * Render response in raw HTTP format
+     * Build HTTP response message
      * 
      * @return string 
      */
     public function getMessage()
     {
         $data = sprintf( '%s %s', $this->protocol, $this->status ) . self::EOL;
-
-        $this->headers[ 'Content-Length' ] = mb_strlen( $this->body );
-        $this->headers[ 'Connection' ]     = 'close';
         
         foreach( $this->headers as $key => $value )
         {
@@ -49,7 +45,7 @@ class Response
     /**
      * Get response body
      * 
-     * @return string $body 
+     * @return Body $body 
      */
     public function getBody()
     {
@@ -59,7 +55,7 @@ class Response
     /**
      * Get response headers
      * 
-     * @return array $headers 
+     * @return Headers $headers 
      */
     public function getHeaders()
     {
@@ -69,7 +65,7 @@ class Response
     /**
      * Get response status
      * 
-     * @return string $status eg '200 OK'
+     * @return Status $status
      */
     public function getStatus()
     {
@@ -79,7 +75,7 @@ class Response
     /**
      * Get response protocol
      * 
-     * @return string $protocol eg 'HTTP/1.1'
+     * @return Protocol $protocol
      */
     public function getProtocol()
     {
