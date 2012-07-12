@@ -53,7 +53,7 @@ Open http://localhost:8001/ in your web browser
 Tests
 --------
 
-    phpunit --bootstrap=examples/autoloader.php -c test/phpunit.xml --coverage-html test/coverage .
+    phpunit -c test/phpunit.xml --coverage-html test/coverage test
 
 Travis CI
 ---------
