@@ -31,12 +31,13 @@ Simple Client Example
         // Build a response
         $response = new \Mongrel\Http\Response( '<h1>Hello World!</h1>', array( 'Content-Type' => 'text/html' ) );
         
-        // Send reply
-        $client->send( $response, $request->getMongrelRequest() );
+        // Send response back to the browser that requested it
+        $client->reply( $response, $request );
         
         // Clean up
         unset( $request, $response );
     }
+
 
 Mustache View Renderer Example
 ------------------------------
