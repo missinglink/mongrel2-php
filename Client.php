@@ -4,6 +4,9 @@ namespace Mongrel;
 
 class Client
 {
+    const FTYPE = \ZMQ::SOCKET_UPSTREAM;
+    const BTYPE = \ZMQ::SOCKET_PUB;
+    
     private $frontend, $backend;
     
     /**
@@ -16,11 +19,11 @@ class Client
     public function __construct( \ZMQContext $context, Dsn $front, Dsn $back )
     {
         // Listen for requests
-        $this->frontend = $context->getSocket( \ZMQ::SOCKET_UPSTREAM, null );
+        $this->frontend = $context->getSocket( self::FTYPE, null );
         $this->frontend->connect( $front->toString() );
 
         // Send responses
-        $this->backend = $context->getSocket( \ZMQ::SOCKET_PUB, null );
+        $this->backend = $context->getSocket( self::BTYPE, null );
         $this->backend->connect( $back->toString() );
     }
 

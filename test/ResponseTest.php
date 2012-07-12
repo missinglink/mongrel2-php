@@ -49,6 +49,15 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     }
     
     /** @dataProvider dataProvider */
+    public function testGetMessage_NoBrowsersSpecified( Response $response )
+    {
+        $this->setExpectedException( 'Mongrel\ResponseException' );
+        
+        $response = new Response( new Request\Uuid( self::$uuid ), new Request\BrowserStack );
+        $response->getMessage();
+    }
+    
+    /** @dataProvider dataProvider */
     public function testGetMessage( Response $response )
     {
         $response->setBody( 'test' );

@@ -28,6 +28,11 @@ class Response
      */
     public function getMessage()
     {
+        if( !$this->browsers->count() )
+        {
+            throw new ResponseException( 'No browsers specified' );
+        }
+        
         return sprintf( '%s %d:%s, %s', $this->uuid, strlen( $this->browsers ), $this->browsers, $this->body );
     }
     

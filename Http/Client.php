@@ -24,7 +24,7 @@ class Client
     /**
      * Receives a message
      * 
-     * @return Request Returns the HTTP request object.
+     * @return Mongrel\Http\Request Returns the HTTP request object.
      */
     public function recv()
     {
@@ -38,8 +38,8 @@ class Client
     /**
      * Reply to the sender of a request
      * 
-     * @param Response $httpResponse The HTTP response to send.
-     * @param Request $httpRequest The HTTP request to reply to.
+     * @param Mongrel\Http\Response $httpResponse The HTTP response to send.
+     * @param Mongrel\Http\Request $httpRequest The HTTP request to reply to.
      * 
      * @return Client Returns the current object.
      */
@@ -55,9 +55,9 @@ class Client
     /**
      * Sends a message
      * 
-     * @param Response $httpResponse The HTTP response to send.
-     * @param Uuid $uuid The Zmq uuid to send the message to.
-     * @param Browser $browser The browser to send the message to.
+     * @param Mongrel\Http\Response $httpResponse The HTTP response to send.
+     * @param Mongrel\Request\Uuid $uuid The Zmq uuid to send the message to.
+     * @param Mongrel\Request\Browser $browser The browser to send the message to.
      * 
      * @return Client Returns the current object.
      */
@@ -74,9 +74,9 @@ class Client
     /**
      * Sends a message to multiple browsers simultaneously
      * 
-     * @param Response $httpResponse The HTTP response to send.
-     * @param Uuid $uuid The Zmq uuid to send the message to.
-     * @param BrowserStack $browsers The browsers to send the message to.
+     * @param Mongrel\Http\Response $httpResponse The HTTP response to send.
+     * @param Mongrel\Request\Uuid $uuid The Zmq uuid to send the message to.
+     * @param Mongrel\Request\BrowserStack $browsers The browsers to send the message to.
      * 
      * @return Client Returns the current object.
      */
