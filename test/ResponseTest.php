@@ -2,10 +2,6 @@
 
 namespace Mongrel;
 
-require_once dirname( __FILE__ ) . '/../Response.php';
-require_once dirname( __FILE__ ) . '/../ResponseException.php';
-require_once dirname( __FILE__ ) . '/../Http/Request.php';
-
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     static $uuid = '288c0bca-f46c-46dc-b15a-bdd581c30e38';

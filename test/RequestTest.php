@@ -2,14 +2,6 @@
 
 namespace Mongrel;
 
-require_once dirname( __FILE__ ) . '/../Request.php';
-require_once dirname( __FILE__ ) . '/../RequestException.php';
-
-require_once dirname( __FILE__ ) . '/../Request/Body.php';
-require_once dirname( __FILE__ ) . '/../Request/Browser.php';
-require_once dirname( __FILE__ ) . '/../Request/Path.php';
-require_once dirname( __FILE__ ) . '/../Request/Uuid.php';
-
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
     static $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';

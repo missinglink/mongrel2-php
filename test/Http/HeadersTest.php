@@ -2,8 +2,6 @@
 
 namespace Mongrel\Http;
 
-require_once dirname( __FILE__ ) . '/../../Http/Headers.php';
-
 class HeadersTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()

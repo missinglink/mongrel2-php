@@ -2,9 +2,6 @@
 
 namespace Mongrel;
 
-require_once dirname( __FILE__ ) . '/../Client.php';
-require_once dirname( __FILE__ ) . '/../Dsn.php';
-
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public static $message = '288c0bca-f46c-46dc-b15a-bdd581c30e38 99 /favicon.ico 23:{"PATH":"/favicon.ico"},0:foo=bar,';

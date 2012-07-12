@@ -2,13 +2,6 @@
 
 namespace Mongrel\Http;
 
-require_once dirname( __FILE__ ) . '/../../Client.php';
-require_once dirname( __FILE__ ) . '/../../Request.php';
-require_once dirname( __FILE__ ) . '/../../Response.php';
-require_once dirname( __FILE__ ) . '/../../Http/Client.php';
-require_once dirname( __FILE__ ) . '/../../Http/Headers.php';
-require_once dirname( __FILE__ ) . '/../../Http/Response.php';
-
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()

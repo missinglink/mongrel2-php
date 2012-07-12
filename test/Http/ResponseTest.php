@@ -2,8 +2,6 @@
 
 namespace Mongrel\Http;
 
-require_once dirname( __FILE__ ) . '/../../Http/Response.php';
-
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorAndGetters()

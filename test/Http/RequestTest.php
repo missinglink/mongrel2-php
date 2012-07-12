@@ -2,9 +2,6 @@
 
 namespace Mongrel\Http;
 
-require_once dirname( __FILE__ ) . '/../../Request.php';
-require_once dirname( __FILE__ ) . '/../../Http/Request.php';
-
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor_InvalidMongrelHeaders()

@@ -2,9 +2,6 @@
 
 namespace Mongrel;
 
-require_once dirname( __FILE__ ) . '/../Dsn.php';
-require_once dirname( __FILE__ ) . '/../DsnException.php';
-
 class DsnTest extends \PHPUnit_Framework_TestCase
 {
     public function invalidDsnProvider()
