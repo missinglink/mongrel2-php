@@ -17,7 +17,6 @@ class Client
      */
     public function __construct( \Mongrel\Client $client )
     {
-        // Set the Mongrel client object
         $this->client = $client;
     }
 
@@ -31,7 +30,6 @@ class Client
         // Wait for a new message from Mongrel
         $request = $this->client->recv();
 
-        // Create a new HTTP request object
         return new Request( $request );
     }
     
@@ -63,12 +61,10 @@ class Client
      */
     public function send( Response $httpResponse, Uuid $uuid, Browser $browser )
     {
-        // Create the Mongrel response object
-        $response = new \Mongrel\Response( $uuid, new BrowserStack( $browser ) );
-        $response->setBody( $httpResponse->getMessage() );
+        $browsers = new BrowserStack;
+        $browsers->attach( $browser );
         
-        // Send message to Mongrel
-        return $this->client->send( $response );
+        return $this->sendMulti( $httpResponse, $uuid, $browsers );
     }
     
     /**
@@ -82,11 +78,9 @@ class Client
      */
     public function sendMulti( Response $httpResponse, Uuid $uuid, BrowserStack $browsers )
     {
-        // Create the Mongrel response object
         $response = new \Mongrel\Response( $uuid, $browsers );
         $response->setBody( $httpResponse->getMessage() );
         
-        // Send message to Mongrel
         return $this->client->send( $response );
     }
 }
