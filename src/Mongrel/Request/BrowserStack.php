@@ -6,8 +6,13 @@ use \Mongrel\RequestException;
 
 class BrowserStack extends \SplObjectStorage
 {
-    public function attach( Browser $browser, $data = null )
+    public function attach( $browser, $data = null )
     {
+        if( !$browser instanceof Browser )
+        {
+            throw new RequestException( 'Invalid Browser' );
+        }
+        
         return parent::attach( $browser, $data );
     }
     
@@ -16,8 +21,13 @@ class BrowserStack extends \SplObjectStorage
         return $this->attach( $browser, $data );
     }
 
-    public function detach( Browser $browser )
+    public function detach( $browser )
     {
+        if( !$browser instanceof Browser )
+        {
+            throw new RequestException( 'Invalid Browser' );
+        }
+        
         return parent::detach( $browser );
     }
     

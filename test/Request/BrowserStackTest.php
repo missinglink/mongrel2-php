@@ -9,7 +9,7 @@ class BrowserStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAttach_InvalidBrowser()
     {
-        $this->setExpectedException( 'PHPUnit_Framework_Error' );
+        $this->setExpectedException( 'Mongrel\RequestException' );
         
         $browsers = new BrowserStack;
         $browsers->attach( new \stdClass );
@@ -31,7 +31,7 @@ class BrowserStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetSet_InvalidBrowser()
     {
-        $this->setExpectedException( 'PHPUnit_Framework_Error' );
+        $this->setExpectedException( 'Mongrel\RequestException' );
         
         $browsers = new BrowserStack;
         $browsers->offsetSet( new \stdClass );
@@ -53,7 +53,7 @@ class BrowserStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testDettach_InvalidBrowser()
     {
-        $this->setExpectedException( 'PHPUnit_Framework_Error' );
+        $this->setExpectedException( 'Mongrel\RequestException' );
         
         $browsers = new BrowserStack;
         $browsers->detach( new \stdClass );
@@ -79,7 +79,7 @@ class BrowserStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetUnSet_InvalidBrowser()
     {
-        $this->setExpectedException( 'PHPUnit_Framework_Error' );
+        $this->setExpectedException( 'Mongrel\RequestException' );
         
         $browsers = new BrowserStack;
         $browsers->offsetUnset( new \stdClass );
