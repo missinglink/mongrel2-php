@@ -1,5 +1,8 @@
 #!/bin/sh
 
+SCRIPT=`readlink -f $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
 sudo apt-get update
 sudo apt-get install -y libtool autoconf automake uuid-dev git-core
 sudo apt-get install -y php5-common php5-dev php5-cli php5-uuid
@@ -36,4 +39,6 @@ printf "\n\n\n\n" | sudo pecl install pecl_http
 echo "extension=http.so" | sudo tee $PHP_INI_PATH/http.ini
 
 # Installing Composer
-curl -s http://getcomposer.org/installer | php && php composer.phar install
+cd $SCRIPTPATH/../
+curl -s http://getcomposer.org/installer | php
+php composer.phar install
