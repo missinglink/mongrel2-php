@@ -41,7 +41,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         return array( array( $context, $front, $back, $dsn, $response ));
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Client::__construct
+     */
     public function testConstructor_Context_InvalidType( $context, $front, $back, $dsn, $response )
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
@@ -49,7 +52,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         new Client( new \stdClass, $dsn, $dsn );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Client::__construct
+     */
     public function testConstructor_FrontDsn_InvalidType( $context, $front, $back, $dsn, $response )
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
@@ -57,7 +63,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         new Client( $context, new \stdClass, $dsn );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Client::__construct
+     */
     public function testConstructor_BackDsn_InvalidType( $context, $front, $back, $dsn, $response )
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
@@ -65,7 +74,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         new Client( $context, $dsn, new \stdClass );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Client::__construct
+     */
     public function testConstructor( $context, $front, $back, $dsn, $response )
     {
         $front->expects( $this->exactly( 1 ) )
@@ -82,7 +94,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame( $back, 'backend', $client );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Client::recv
+     */
     public function testRecv( $context, $front, $back, $dsn, $response )
     {
         $front->expects( $this->exactly( 1 ) )
@@ -95,7 +110,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( new \Mongrel\Request( self::$message ), $recv );
     }
 
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Client::send
+     */
     public function testSend( $context, $front, $back, $dsn, $response )
     {       
         $back->expects( $this->exactly( 1 ) )

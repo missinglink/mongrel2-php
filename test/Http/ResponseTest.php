@@ -4,6 +4,9 @@ namespace Mongrel\Http;
 
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers \Mongrel\Http\Response::__construct
+     */
     public function testConstructorAndGetters()
     {
         $response = new Response( 'a', array( 'b' => 'c' ), '404 Not Found', 'HTTP/1.0' );
@@ -14,6 +17,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( 'HTTP/1.0', $response->getProtocol() );
     }
     
+    /**
+     * @covers \Mongrel\Http\Response::getMessage
+     */
     public function testGetMessage()
     {
         $response = new Response( '<p>Hello World</p>', array( 'Content-Type' => 'text/html' ), '200 OK', 'HTTP/1.1' );

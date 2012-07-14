@@ -38,7 +38,10 @@ class DsnTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame( $expected[2], 'port', $object );
     }
 
-    /** @dataProvider validDsnProvider **/
+    /**
+     * @dataProvider validDsnProvider
+     * @covers \Mongrel\Dsn::getProtocol
+     */
     public function testGetProtocol( $dsn, $expected )
     {
         $object = new Dsn( $dsn );
@@ -46,7 +49,10 @@ class DsnTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( $expected[0], $object->getProtocol() );
     }
 
-    /** @dataProvider validDsnProvider **/
+    /**
+     * @dataProvider validDsnProvider
+     * @covers \Mongrel\Dsn::getIp
+     */
     public function testGetIp( $dsn, $expected )
     {
         $object = new Dsn( $dsn );
@@ -54,7 +60,10 @@ class DsnTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( $expected[1], $object->getIp() );
     }
 
-    /** @dataProvider validDsnProvider **/
+    /**
+     * @dataProvider validDsnProvider
+     * @covers \Mongrel\Dsn::getPort
+     */
     public function testGetPort( $dsn, $expected )
     {
         $object = new Dsn( $dsn );
@@ -62,7 +71,10 @@ class DsnTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( $expected[2], $object->getPort() );
     }
     
-    /** @dataProvider validDsnProvider **/
+    /**
+     * @dataProvider validDsnProvider
+     * @covers \Mongrel\Dsn::toString
+     */
     public function testToString( $dsn, $expected )
     {
         $object = new Dsn( $dsn );

@@ -16,6 +16,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->mongrelRequest = $this->getMock( 'Mongrel\Request', null, array( $message ) );
     }
     
+    /**
+     * @covers \Mongrel\Http\Client::__construct
+     */
     public function testConstructor_InvalidParam()
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
@@ -23,6 +26,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = new Client( array() );
     }
     
+    /**
+     * @covers \Mongrel\Http\Client::__construct
+     */
     public function testConstructor()
     {
         $client = new Client( $this->mongrelClient );
@@ -30,6 +36,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame( $this->mongrelClient, 'client', $client );
     }
     
+    /**
+     * @covers \Mongrel\Http\Client::recv
+     */
     public function testRecv()
     {
         $this->mongrelClient->expects( $this->once() )
@@ -43,6 +52,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame( $this->mongrelRequest, $recv->getMongrelRequest() );
     }
 
+    /**
+     * @covers \Mongrel\Http\Client::send
+     */
     public function testSend()
     {
         $httpResponse = $this->getMock( 'Mongrel\Http\Response', array( 'getMessage' ), array( 'test' ) );

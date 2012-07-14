@@ -17,13 +17,19 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         return array( array( $response ) );
     }
     
+    /**
+     * @covers \Mongrel\Response::__construct
+     */
     public function testConstructor_ParamIsNotString()
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
         new Response( array() );
     }
-    
+
+    /**
+     * @covers \Mongrel\Response::__construct
+     */
     public function testConstructor_MissingParams()
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
@@ -31,6 +37,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         new Response;
     }
     
+    /**
+     * @covers \Mongrel\Response::__construct
+     */
     public function testConstructor_InvalidTypeParams()
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
@@ -38,13 +47,19 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         new Response( new \stdClass, new \stdClass );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Response::__construct
+     */
     public function testConstructor( Response $response )
     {
         $this->assertInstanceOf( 'Mongrel\Response', $response );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Response::getMessage
+     */
     public function testGetMessage_NoBrowsersSpecified( Response $response )
     {
         $this->setExpectedException( 'Mongrel\ResponseException' );
@@ -53,7 +68,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response->getMessage();
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Response::getMessage
+     */
     public function testGetMessage( Response $response )
     {
         $response->setBody( 'test' );
@@ -61,7 +79,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( self::$uuid . ' 3:1 2, test', $response->getMessage() );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Response::setBody
+     */
     public function testSetBody_InvalidParam( Response $response )
     {
         $this->setExpectedException( 'Mongrel\ResponseException' );
@@ -69,7 +90,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response->setBody( array() );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Response::setBody
+     */
     public function testSetBody( Response $response )
     {
         $response->setBody( 'test' );

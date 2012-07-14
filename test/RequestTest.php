@@ -11,6 +11,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         return array( array( new Request( self::$message ) ) );
     }
     
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::__construct
+     */
     public function testConstructor_ParamIsNotString()
     {
         $this->setExpectedException( 'Mongrel\RequestException' );
@@ -18,6 +22,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         new Request( array() );
     }
     
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::__construct
+     */
     public function testConstructor_Invalid_Message()
     {
         $this->setExpectedException( 'Mongrel\RequestException' );
@@ -25,7 +33,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         new Request( 'invalid message' );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::__construct
+     */
     public function testConstructor( Request $request )
     {
         $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $request );
@@ -35,38 +46,48 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeInstanceOf( '\Mongrel\Request\Body', 'body', $request );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::getUuid
+     */
     public function testGetUuid( Request $request )
     {
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $request );
         $this->assertEquals( '288c0bca-f46c-46dc-b15a-bdd581c30e38', (string) $request->getUuid() );
     }
 
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::getBrowser
+     */
     public function testGetBrowser( Request $request )
     {
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\Browser', 'browser', $request );
         $this->assertEquals( '99', (string) $request->getBrowser() );
     }
 
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::getPath
+     */
     public function testGetPath( Request $request )
     {
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\Path', 'path', $request );
         $this->assertEquals( '/favicon.ico', (string) $request->getPath() );
     }
 
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::getHeaders
+     */
     public function testGetHeaders( Request $request )
     {
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\Headers', 'headers', $request );
         $this->assertEquals( array( 'PATH' => '/favicon.ico' ), $request->getHeaders()->getArrayCopy() );
     }
     
-    /** @dataProvider dataProvider */
+    /**
+     * @dataProvider dataProvider
+     * @covers \Mongrel\Request::getBody
+     */
     public function testGetBody( Request $request )
     {
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\Body', 'body', $request );
         $this->assertEquals( 'foo=bar', (string) $request->getBody() );
     }
 }
