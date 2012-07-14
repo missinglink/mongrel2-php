@@ -5,7 +5,7 @@ php:
 
 before_install:
     - echo '[Installing Prerequisites]'
-    - ./install/ci-bootstrap.sh > /dev/null 2>&1
+    - ./install/ci-bootstrap.sh
 
 script: phpunit -c test/phpunit.xml test
 
