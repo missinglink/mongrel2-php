@@ -17,9 +17,9 @@ class Protocol
      */
     public function __construct( $protocol )
     {
-        if( !preg_match( self::FORMAT, $protocol ) )
+        if( !is_string( $protocol ) || !preg_match( self::FORMAT, $protocol ) )
         {
-            throw new RequestException( 'Invalid response protocol' );
+            throw new ResponseException( 'Invalid response protocol' );
         }
         
         $this->protocol = $protocol;

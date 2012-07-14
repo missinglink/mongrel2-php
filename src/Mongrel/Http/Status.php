@@ -17,7 +17,7 @@ class Status
      */
     public function __construct( $status )
     {
-        if( !preg_match( self::FORMAT, $status ) )
+        if( !is_string( $status ) || !preg_match( self::FORMAT, $status ) )
         {
             throw new ResponseException( 'Invalid response status line' );
         }

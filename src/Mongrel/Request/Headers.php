@@ -19,9 +19,9 @@ class Headers extends \ArrayObject
             throw new RequestException( 'Failed to parse mongrel request headers' );
         }
         
-        $headers = json_decode( $headers );
+        $headers = json_decode( $headers, true );
         
-        if( is_array( $headers ) )
+        if( !is_array( $headers ) )
         {
             throw new RequestException( 'Invalid JSON format. Failed to parse mongrel request headers' );
         }

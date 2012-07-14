@@ -2,6 +2,8 @@
 
 namespace Mongrel\Request;
 
+use \Mongrel\RequestException;
+
 class BrowserStack extends \SplObjectStorage
 {
     public function attach( Browser $browser, $data = null )
@@ -9,7 +11,7 @@ class BrowserStack extends \SplObjectStorage
         return parent::attach( $browser, $data );
     }
     
-    public function offsetSet( $browser, $value = null )
+    public function offsetSet( $browser, $data = null )
     {
         return $this->attach( $browser, $data );
     }
@@ -21,11 +23,16 @@ class BrowserStack extends \SplObjectStorage
     
     public function offsetUnset( $browser )
     {
-        return $this->detach( $browser, $data );
+        return $this->detach( $browser );
     }
     
     public function __toString()
-    {        
+    {
+        if( 0 === $this->count() )
+        {
+            throw new RequestException( 'No browsers specified' );
+        }
+        
         $browsers = array();
         
         foreach( $this as $browser )

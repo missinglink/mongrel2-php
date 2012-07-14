@@ -19,7 +19,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             ->method( 'getHeaders' )
             ->will( $this->returnValue( null ) );
         
-        $request = new Request( $mockMongrelRequest );
+        new Request( $mockMongrelRequest );
     }
     
     /**

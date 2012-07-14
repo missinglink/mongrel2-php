@@ -23,7 +23,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException( 'PHPUnit_Framework_Error' );
         
-        $client = new Client( array() );
+        new Client( array() );
     }
     
     /**
@@ -54,6 +54,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Mongrel\Http\Client::send
+     * @todo improve test
      */
     public function testSend()
     {
@@ -68,5 +69,52 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         
         $client = new Client( $this->mongrelClient );
         $client->send( $httpResponse, $this->mongrelRequest->getUuid(), $this->mongrelRequest->getBrowser() );
+    }
+    
+    /**
+     * @depends testSend
+     * @covers \Mongrel\Http\Client::sendMulti
+     * @todo improve test
+     */
+    public function testSendMulti()
+    {
+        $httpResponse = $this->getMock( 'Mongrel\Http\Response', array( 'getMessage' ), array( 'test' ) );
+        
+        $httpResponse->expects( $this->once() )
+            ->method( 'getMessage' )
+            ->will( $this->returnValue( 'test' ) );
+
+        $this->mongrelClient->expects( $this->once() )
+                ->method( 'send' );
+        
+        $client = new Client( $this->mongrelClient );
+        $client->sendMulti( $httpResponse, $this->mongrelRequest->getUuid(), new \Mongrel\Request\BrowserStack( $this->mongrelRequest->getBrowser() ) );
+    }
+    
+    /**
+     * @depends testRecv
+     * @depends testSend
+     * @covers \Mongrel\Http\Client::reply
+     */
+    public function testReply()
+    {
+        $this->mongrelClient->expects( $this->once() )
+            ->method( 'recv' )
+            ->will( $this->returnValue( $this->mongrelRequest ) );
+        
+        $client = new Client( $this->mongrelClient );
+        $recv = $client->recv();
+        
+        $httpResponse = $this->getMock( 'Mongrel\Http\Response', array( 'getMessage' ), array( 'test' ) );
+        
+        $httpResponse->expects( $this->once() )
+            ->method( 'getMessage' )
+            ->will( $this->returnValue( 'test' ) );
+
+        $this->mongrelClient->expects( $this->once() )
+                ->method( 'send' );
+        
+        $client = new Client( $this->mongrelClient );
+        $client->reply( $httpResponse, $recv );
     }
 }
