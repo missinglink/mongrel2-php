@@ -3,7 +3,7 @@
 
 use \Mongrel\Http;
 
-require_once sprintf( '%s/../../autoloader.php', __DIR__ );
+require_once sprintf( '%s/../../../vendor/autoload.php', __DIR__ );
 require_once sprintf( '%s/Mustache.php', __DIR__ );
 
 // Use Mustache view renderer

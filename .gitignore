@@ -1,5 +1,4 @@
-examples/mongrel/logs/*
-examples/mongrel/run/*
-examples/mongrel/tmp/*
-examples/config.sqlite
+config.sqlite
+composer.phar
+vendor
 test/coverage

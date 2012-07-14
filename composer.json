@@ -1,0 +1,28 @@
+{
+    "name": "missinglink/mongrel2-php",
+    "version": "0.0.1",
+    "type": "library", 
+    "description": "Simple library for writing Mongrel2 clients in PHP 5.3+ using zeromq 2.2", 
+    "keywords": ["Mongrel", "Mongrel2", "zeromq", "0mq"], 
+    "website": "https://github.com/missinglink/mongrel2-php",
+    "repository": "https://github.com/missinglink/mongrel2-php",
+    
+    "authors": [
+        {
+            "name": "Peter Johnson",
+            "email": "insomnia@rcpt.at"
+        }
+    ],
+    
+    "autoload": {
+        "psr-0": {
+            "Mongrel": "src"
+        }
+    }, 
+    
+    "require": {
+        "php": ">=5.3",
+        "ext-http": "*",
+        "ext-zmq": "*"
+    }
+}

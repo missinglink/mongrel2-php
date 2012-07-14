@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="../examples/autoloader.php" colors="true">
+<phpunit bootstrap="../vendor/autoload.php" colors="true">
     <testsuites>
         <testsuite name="Mongrel Core">
             <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">test/Mongrel</directory>

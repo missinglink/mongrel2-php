@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-# BASEDIR=$(dirname $0)
+SCRIPT=`readlink -f $0`
+SCRIPTPATH=`dirname $SCRIPT`
 
-mkdir mongrel/run mongrel/logs mongrel/tmp
-chmod 777 -R mongrel/run mongrel/logs mongrel/tmp
+mkdir $SCRIPTPATH/mongrel/run $SCRIPTPATH/mongrel/logs $SCRIPTPATH/mongrel/tmp
+chmod 777 -R $SCRIPTPATH/mongrel/run $SCRIPTPATH/mongrel/logs $SCRIPTPATH/mongrel/tmp
 
-m2sh load -config mongrel/sites/example.conf
+m2sh load -config $SCRIPTPATH/mongrel/sites/example.conf
 
 echo "Port opened on localhost:8001"
 m2sh start -host localhost

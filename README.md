@@ -7,6 +7,7 @@ Install
     echo '[Installing ØMQ 2.2]' && ./install/zmq22-install.sh
     echo '[Installing ØMQ PHP Module]' && ./install/zmqphp-install.sh
     echo '[Installing pecl_http Module]' && ./install/pecl-http-install.sh
+    echo '[Installing Composer]' && curl -s http://getcomposer.org/installer | php && php composer.phar install
     echo '[Installing Mongrel2 Web Server]' && ./install/mongrel2-zmq2-install.sh
 
 Simple Client Example
@@ -42,9 +43,8 @@ Simple Client Example
 Mustache View Renderer Example
 ------------------------------
 
-    cd ./examples
-    ./mongrel-start.sh
-    ./mustache/devices/mustache-server.sh (in another window)
+    ./examples/mongrel-start.sh
+    ./examples/mustache/devices/mustache-server.sh (in another window)
 
 https://github.com/missinglink/mongrel2-php/blob/master/examples/mustache/devices/mustache-server.sh
 
