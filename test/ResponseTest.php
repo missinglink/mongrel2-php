@@ -55,8 +55,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf( 'Mongrel\Response', $response );
         
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $request );
-        $this->assertAttributeInstanceOf( '\Mongrel\Request\BrowserStack', 'browsers', $request );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\Uuid', 'uuid', $response );
+        $this->assertAttributeInstanceOf( '\Mongrel\Request\BrowserStack', 'browsers', $response );
     }
     
     /**

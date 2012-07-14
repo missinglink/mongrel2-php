@@ -32,4 +32,44 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals( $expected, $response->getMessage() );
     }
+    
+    /**
+     * @covers \Mongrel\Http\Response::getBody
+     */
+    public function testGetBody()
+    {
+        $response = new Response( '<p>Hello World</p>', array( 'Content-Type' => 'text/html' ), '200 OK', 'HTTP/1.1' );
+        
+        $this->assertEquals( '<p>Hello World</p>', (string) $response->getBody() );
+    }
+    
+    /**
+     * @covers \Mongrel\Http\Response::getHeaders
+     */
+    public function testGetHeaders()
+    {
+        $response = new Response( '<p>Hello World</p>', array( 'Content-Type' => 'text/html' ), '200 OK', 'HTTP/1.1' );
+        
+        $this->assertEquals( array( 'Content-Type' => 'text/html', 'Content-Length' => 18 ), $response->getHeaders()->getArrayCopy() );
+    }
+    
+    /**
+     * @covers \Mongrel\Http\Response::getStatus
+     */
+    public function testGetStatus()
+    {
+        $response = new Response( '<p>Hello World</p>', array( 'Content-Type' => 'text/html' ), '200 OK', 'HTTP/1.1' );
+        
+        $this->assertEquals( '200 OK', (string) $response->getStatus() );
+    }
+    
+    /**
+     * @covers \Mongrel\Http\Response::getProtocol
+     */
+    public function testGetProtocol()
+    {
+        $response = new Response( '<p>Hello World</p>', array( 'Content-Type' => 'text/html' ), '200 OK', 'HTTP/1.1' );
+        
+        $this->assertEquals( 'HTTP/1.1', (string) $response->getProtocol() );
+    }
 }
