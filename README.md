@@ -53,7 +53,7 @@ Open http://localhost:8001/ in your web browser
 Tests
 --------
 
-    phpunit -c test/phpunit.xml --coverage-html test/coverage test
+    phpunit test
 
 Travis CI
 ---------
