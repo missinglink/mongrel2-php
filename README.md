@@ -53,7 +53,7 @@ Open http://localhost:8001/ in your web browser
 Tests
 --------
 
-    phpunit test
+    phpunit
 
 Travis CI
 ---------

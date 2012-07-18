@@ -7,7 +7,7 @@ before_install:
     - echo '[Installing Prerequisites]'
     - ./install/ci-bootstrap.sh > /dev/null 2>&1
 
-script: phpunit .
+script: phpunit
 
 after_script:
     - cat test/coverage/coverage.txt
