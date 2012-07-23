@@ -46,8 +46,6 @@ Mustache View Renderer Example
     sh examples/mongrel-start.sh
     sh examples/mustache/devices/mustache-server.sh # (in another window)
 
-blob/master/examples/mustache/devices/mustache-server.sh
-
 Open http://localhost:8001/ in your web browser
 
 Tests
