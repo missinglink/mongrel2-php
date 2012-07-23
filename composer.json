@@ -1,11 +1,11 @@
 {
-    "name": "missinglink/mongrel2-php",
+    "name": "vize/mongrel",
     "version": "0.0.1",
     "type": "library", 
     "description": "Simple library for writing Mongrel2 clients in PHP 5.3+ using zeromq 2.2", 
     "keywords": ["Mongrel", "Mongrel2", "zeromq", "0mq"], 
-    "website": "https://github.com/missinglink/mongrel2-php",
-    "repository": "https://github.com/missinglink/mongrel2-php",
+    "website": "https://github.com/vize/mongrel",
+    "repository": "https://github.com/vize/mongrel",
     
     "authors": [
         {

@@ -46,7 +46,7 @@ Mustache View Renderer Example
     ./examples/mongrel-start.sh
     ./examples/mustache/devices/mustache-server.sh (in another window)
 
-https://github.com/missinglink/mongrel2-php/blob/master/examples/mustache/devices/mustache-server.sh
+https://github.com/vize/mongrel/blob/master/examples/mustache/devices/mustache-server.sh
 
 Open http://localhost:8001/ in your web browser
 
@@ -58,9 +58,9 @@ Tests
 Travis CI
 ---------
 
-![travis-ci](http://cdn-ak.favicon.st-hatena.com/?url=http%3A%2F%2Fabout.travis-ci.org%2F)&nbsp;http://travis-ci.org/#!/missinglink/mongrel2-php
+![travis-ci](http://cdn-ak.favicon.st-hatena.com/?url=http%3A%2F%2Fabout.travis-ci.org%2F)&nbsp;http://travis-ci.org/#!/vize/mongrel
 
-![travis-ci](https://secure.travis-ci.org/missinglink/mongrel2-php.png?branch=master)
+![travis-ci](https://secure.travis-ci.org/vize/mongrel.png?branch=master)
 
 License
 ------------------------
