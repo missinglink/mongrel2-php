@@ -43,10 +43,10 @@ Simple Client Example
 Mustache View Renderer Example
 ------------------------------
 
-    ./examples/mongrel-start.sh
-    ./examples/mustache/devices/mustache-server.sh (in another window)
+    sh examples/mongrel-start.sh
+    sh examples/mustache/devices/mustache-server.sh # (in another window)
 
-https://github.com/vize/mongrel/blob/master/examples/mustache/devices/mustache-server.sh
+blob/master/examples/mustache/devices/mustache-server.sh
 
 Open http://localhost:8001/ in your web browser
 
