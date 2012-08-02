@@ -22,7 +22,14 @@
     
     "require": {
         "php": ">=5.3",
+        "ext-curl": "*",
+        
+        "doctrine/common": "dev-master",
+        "doctrine/dbal": "dev-master",
         "doctrine/orm": "dev-master",
+        
+        "symfony/yaml": "*",
+        
         "ext-http": "*",
         "ext-zmq": "*"
     }
