@@ -22,6 +22,7 @@
     
     "require": {
         "php": ">=5.3",
+        "doctrine/orm": "dev-master",
         "ext-http": "*",
         "ext-zmq": "*"
     }
